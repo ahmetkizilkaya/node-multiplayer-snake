@@ -8,7 +8,7 @@ node ('Ubuntu-AppServer'){
     stage('Build-And-Tag') {
     /* This builds the actual image; synonymous to docker build on the command line */
         sh 'echo BuildAndTag start'
-        app = docker.build("akizilkaya/snake")
+        app = docker.build("akizilkaya/snake:latest")
         sh 'echo BuildAndTag end'
     }
     
