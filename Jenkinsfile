@@ -1,4 +1,4 @@
-node ('master'){  
+node ('Ubuntu-AppServer'){  
     def app
     stage('Clone-Git') {
         /* Let's make sure we have the repository cloned to our workspace */
