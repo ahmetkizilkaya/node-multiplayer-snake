@@ -11,11 +11,16 @@ node ('Ubuntu-AppServer'){
          app = docker.build("akizilkaya/snake")
     }
     stage('Post-To-DockerHub') {
+        sh 'echo Post-To_DockerHub start'
         docker.withRegistry('https://registry.hub.docker.com', 'test-docker-cred') {
-          app.push("latest")}
-         }
-    
-    stage('Pull-image-server') {
+            sh 'echo with registry start'
+            app.push("latest")
+            sh 'echo with registry end'
+        }
+        sh 'echo Post-To_DockerHub end'
+     }
+
+    stage('Pull-Image-Server') {
          sh "docker-compose down"
          sh "docker-compose up -d"	
       }
