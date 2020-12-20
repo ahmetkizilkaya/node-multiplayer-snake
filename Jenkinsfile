@@ -14,7 +14,7 @@ node ('Ubuntu-AppServer'){
     }
     stage('Post-to-dockerhub') {
     
-     docker.withRegistry('https://registry.hub.docker.com', 'test-docker-cred') {
+     docker.withRegistry('https://registry.hub.docker.com', 'testcred') {
             app.push("latest")
         			}
          }
