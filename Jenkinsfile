@@ -1,5 +1,5 @@
 node ('master'){  
-    // def app
+    def app
     stage('Clone-Git') {
         /* Let's make sure we have the repository cloned to our workspace */
        checkout scm
