@@ -1,29 +1,31 @@
 node ('Ubuntu-AppServer'){  
     def app
-    stage('Clone-Git') {
+    stage('Cloning Git') {
         /* Let's make sure we have the repository cloned to our workspace */
        checkout scm
     }  
-    
-    stage('Build-And-Tag') {
-    /* This builds the actual image; synonymous to docker build on the command line */
-        sh 'echo BuildAndTag start'
-        app = docker.build("akizilkaya/snake:latest")
-        sh 'echo BuildAndTag end'
-    }
-    
-    stage('Post-To-DockerHub') {
-        sh 'echo Post-To_DockerHub start'
-        docker.withRegistry('https://registry.hub.docker.com', 'test-docker-cred') {
-            sh 'echo with registry start'
-            app.push("latest")
-            sh 'echo with registry end'
-        }
-        sh 'echo Post-To_DockerHub end'
-     }
 
-    stage('Pull-Image-Server') {
+
+    
+    stage('Build-and-Tag') {
+    /* This builds the actual image; synonymous to
+         * docker build on the command line */
+        app = docker.build("akizilkaya/snake")
+    }
+    stage('Post-to-dockerhub') {
+    
+     docker.withRegistry('https://registry.hub.docker.com', 'test-docker-cred') {
+            app.push("latest")
+        			}
+         }
+
+  
+    
+    stage('Pull-image-server') {
+    
          sh "docker-compose down"
          sh "docker-compose up -d"	
       }
+
+ 
 }
