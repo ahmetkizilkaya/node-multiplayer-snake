@@ -22,7 +22,7 @@ node ('Ubuntu-AppServer'){
          }
 
     stage('IMAGE-SCANNER'){
-        build 'SECURITY-IMAGE-SCANNER-AQUA'
+        build 'SECURITY-IMAGE-SCANNER-ANCHOR'
     }
     
     stage('Pull-image-server') {
